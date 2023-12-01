@@ -8,7 +8,7 @@ const NumberMap = {
   three: 3,
   four: 4,
   five: 5,
-  six:6,
+  six: 6,
   seven: 7,
   eight: 8,
   nine: 9
@@ -42,8 +42,11 @@ function processLine1(str) {
 
 /** @type {StringProcessor} */
 function processLine2(str) {
-  const result = str.match(/(\d|one|two|three|four|five|six|seven|eight|nine)/g);
-  
+  const result = Array.from(
+    str.matchAll(/(?=(\d|one|two|three|four|five|six|seven|eight|nine))/g),
+    ([, match]) => match
+  );
+
   if (!result) {
     throw new Error(`Invalid line: ${str}. No number found.`);
   };
